@@ -9,11 +9,34 @@
 </head>
 
 <body>
-    <!-- <form> -->
-        <textarea name="input" id="inputId" placeholder="Paste your input here...">dmwlkdlw</textarea>
+    <form>
+        <textarea name="input" id="myTextarea" placeholder="Paste your input here..."></textarea>
         <br>
-        <button>Submit</button>
-    <!-- </form> -->
+        <button type="submit" id="myButton">Submit</button>
+    </form>
 </body>
 
+<script type="module">const form = document.querySelector('form');
+
+form.addEventListener('submit', (event) => {
+  event.preventDefault(); // Stop the page from reloading
+  
+  const formData = new FormData(form);
+  const text = formData.get('input'); // Uses the 'name' attribute of your textarea
+  
+  console.log(text);
+});
+
+import { GoogleGenAI } from "@google/genai";
+
+const ai = new GoogleGenAI({});
+
+const interaction = await ai.interactions.create({
+  model: "gemini-3.5-flash",
+  input: "Explain how AI works in a few words",
+});
+console.log(interaction.output_text);
+
+
+</script>
 </html>
